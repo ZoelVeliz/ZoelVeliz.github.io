@@ -1,0 +1,49 @@
+
+
+ <!-- Division de galeria -->
+ <div class="galeria">
+ <!-- agregandole boostrap  a la seccion de galeria  -->
+  <style type="text/css" >
+ .galeria{
+  max-width: 100%;
+  height: 400px;
+
+  }
+ 
+    
+
+
+  </style>
+
+            <h1>Mis Imagenes</h1>
+
+             <!-- conectamos con la base de datos -->
+            <?php
+                require 'configg.php';
+                require 'GestorArchivos.php'; 
+
+                
+                //Conexion a la base de Datos
+                
+                $conexion = new mysqli($servidor, $usuarioBD, $passwordBD, $baseDatos);
+                $consulta = "SELECT archivo, directorio FROM galeriaimagenes ORDER BY id";
+                $resultado = $conexion->query($consulta);
+
+                // Muestra las imagenes de la galeria.
+                while($filas = $resultado->fetch_array(MYSQLI_ASSOC)) {
+                    // Se comprueba que existan las imagenes
+                    if (file_exists("imagenes/".$filas["directorio"]."/".$filas["archivo"])){
+                        echo'<a href="imagenes/'.$filas['directorio'].'/'.$filas['archivo'].'" rel="lightbox[galeria]" title="'.$filas['archivo'].'"><img src="imagenes/'.$filas['directorio'].'/'.$filas['archivo'].'"/></a>';
+                    }                    
+                }
+            ?>
+      
+      
+            </div>
+            </div>
+            </div>
+          </section>
+          <body onLoad="
+            mostrarInputFileModificado('imagen1');
+            cambiarOpacidadImagenes(0.5);
+        ">

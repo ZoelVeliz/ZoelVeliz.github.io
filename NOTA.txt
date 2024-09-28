@@ -1,0 +1,8 @@
+conexion
+config.inc
+configg
+config
+
+
+configg en academia3
+connectdb
